@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 470333585a4b825448cac7a5f5d8986b, type: 3}
-  m_Name: BalloonDeathEvent
+  m_Script: {fileID: 11500000, guid: 5fbbd875bd894b442bd028cc473fc68f, type: 3}
+  m_Name: DeathChannelSO
   m_EditorClassIdentifier: 

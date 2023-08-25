@@ -1,5 +1,115 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6346442250457901008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5246794367930294561}
+  - component: {fileID: 4959148778808633158}
+  - component: {fileID: 6674985079268543922}
+  - component: {fileID: 4486173475352793748}
+  m_Layer: 2
+  m_Name: Explosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5246794367930294561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346442250457901008}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0801383, y: 1.0801383, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5150785742960892463}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!250 &4959148778808633158
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346442250457901008}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: 15
+  m_ForceVariation: 20
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0
+--- !u!58 &6674985079268543922
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346442250457901008}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5
+--- !u!114 &4486173475352793748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346442250457901008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54ce2cdf943e424583a5d75f95d97d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runAtEnable: 0
+  runAtStart: 1
+  time: 0.5
+  endTimerAction:
+    m_PersistentCalls:
+      m_Calls: []
+  destroySelf: 1
+  onlySetActive: 0
+  isEnd: 0
 --- !u!1 &8822592598091940973
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,7 +124,7 @@ GameObject:
   - component: {fileID: 650140827507511356}
   - component: {fileID: 2118517533384007568}
   m_Layer: 0
-  m_Name: Balloon
+  m_Name: BalloonBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,10 +139,11 @@ Transform:
   m_GameObject: {fileID: 8822592598091940973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75529486, y: 0.75529486, z: 0}
+  m_LocalScale: {x: 0.92580736, y: 0.92580736, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6356037717692805958}
+  - {fileID: 5246794367930294561}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,16 +213,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liderboard: {fileID: 11400000, guid: 9d60cacf5b9f5f84e89a0cc8c8163846, type: 2}
   deathChannel: {fileID: 11400000, guid: 207e273f3e0793a4aba6f7c8c3ad736b, type: 2}
-  scoreChannel: {fileID: 11400000, guid: a308daf0248b8304d9cffba93a1e6fda, type: 2}
   playerTapChannel: {fileID: 11400000, guid: 40818d4b0858a164b9cb2c2d334b01ec, type: 2}
   myRig: {fileID: 650140827507511356}
   force: 2
   maxSpeed: 2
   amplitude: 0.5
   frequency: 1
-  direction: {x: 0, y: 1}
-  useSin: 0
-  explosion: {fileID: 5787955553281070086, guid: 22c1f6a183b0e8245ae88fb8471f4d64, type: 3}
+  explosion: {fileID: 6346442250457901008}
 --- !u!50 &650140827507511356
 Rigidbody2D:
   serializedVersion: 4
@@ -124,7 +232,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.1926718
+  m_Mass: 0.28948516
   m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0

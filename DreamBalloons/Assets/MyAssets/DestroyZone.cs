@@ -4,6 +4,8 @@ public class DestroyZone : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        Destroy(other.gameObject);
+        if(other.TryGetComponent(out Balloon balloon)){
+            balloon.Death(false);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace LiderboardSystem
     {
         public string Name;
         public int Score;
-        public long DateLong; // DateTime ?? ?????????????, utc ??????
+        public long DateLong;
 
         public Result(string name, int score, DateTime date)
         {

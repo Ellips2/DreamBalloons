@@ -15,7 +15,7 @@ namespace LiderboardSystem
             _results = new List<Result>();
         }
 
-        public IEnumerable<Result> Results => Results;
+        public IEnumerable<Result> Results => _results;
 
         public override string ToString()
         {
