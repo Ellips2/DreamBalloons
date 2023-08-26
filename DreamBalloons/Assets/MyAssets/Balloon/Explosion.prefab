@@ -102,12 +102,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c54ce2cdf943e424583a5d75f95d97d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runAtEnable: 0
-  runAtStart: 1
+  runAtEnable: 1
+  runAtStart: 0
   time: 0.5
   endTimerAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -6239314199331307335}
+        m_TargetAssemblyTypeName: Explosion, Assembly-CSharp
+        m_MethodName: EndOfExplosion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   destroySelf: 0
   onlySetActive: 1
   isEnd: 0
@@ -123,3 +135,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d930d2c6cdb364197e55561955f70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionChannel: {fileID: 11400000, guid: ccf20c1b0bb71ad42ae083f8ce96d9f4, type: 2}

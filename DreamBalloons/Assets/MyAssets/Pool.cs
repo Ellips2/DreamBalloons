@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Pool <T> where T : MonoBehaviour
 {
     private List<T> poolActive = new List<T>();

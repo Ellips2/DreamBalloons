@@ -9,15 +9,18 @@ public class Spawner : MonoBehaviour
     public Balloon instBalloon;
     public Explosion instExplosion;
     public BoxCollider2D spawnZone;
-    public Transform headOfObjs;
+    public Transform balloonHead;
+    public Transform explosionHead;
     public List<Color> spriteRendererColors = new List<Color>();
-    //private List<Balloon> poolObjectsActive = new List<Balloon>();
-    //private List<Balloon> poolObjectsNonActive = new List<Balloon>();
     private Pool<Balloon> balloonPool;
     private Pool<Explosion> explosionPool;
 
     [SerializeField]
     private BalloonEventChannelSO deathChannel;
+    [SerializeField]
+    private ExplosionEventChannelSO explosionChannel;
+    [SerializeField]
+    private TransformEventChannelSO explosionTransformChannel;
 
     public bool useRandScale;    
     [Range(0.1f, 2.0f)]
@@ -35,18 +38,24 @@ public class Spawner : MonoBehaviour
 
     private void Awake()
     {
-        balloonPool = new Pool<Balloon>(instBalloon, headOfObjs);
-        explosionPool = new Pool<Explosion>(instExplosion, headOfObjs);
-        deathChannel.OnEventRaised += UpdateNonActivePoolObj;
+        balloonPool = new Pool<Balloon>(instBalloon, balloonHead);
+        explosionPool = new Pool<Explosion>(instExplosion, explosionHead);
+
+        deathChannel.OnEventRaised += RefreshNonActiveBalloonPool;
+        explosionChannel.OnEventRaised += RefreshNonActiveExplosionPool;
+        explosionTransformChannel.OnEventRaised += CreateExplosion;
     }
+
     private void OnDisable()
     {
-        deathChannel.OnEventRaised -= UpdateNonActivePoolObj;
+        deathChannel.OnEventRaised -= RefreshNonActiveBalloonPool;
+        explosionChannel.OnEventRaised -= RefreshNonActiveExplosionPool;
+        explosionTransformChannel.OnEventRaised -= CreateExplosion;
     }
 
     private void Start() 
     {
-        if (instBalloon && spawnZone && headOfObjs && instExplosion)
+        if (instBalloon && spawnZone && balloonHead && instExplosion && explosionHead)
             StartCoroutine(Spawn());
         else
             Debug.LogError("Null Reference exception");
@@ -55,67 +64,49 @@ public class Spawner : MonoBehaviour
     private IEnumerator Spawn()
     {
         while(true)
-        { 
-            Balloon newBallon = balloonPool.GetItem();
-            
-            newBallon.transform.position = GetRandPosInZone(spawnZone.bounds);
-
-            if (spriteRendererColors.Count > 0)
-            {
-                Color newColor = spriteRendererColors[Random.Range(0, spriteRendererColors.Count)];
-                newBallon.Init(newColor);
-            }
-
-            float x = Random.Range(minSize, maxSize);
-            Vector2 newSize = new Vector2(x, x);
-            newBallon.transform.localScale = newSize;
-
-            // if (poolObjectsNonActive.Count == 0)
-            // {
-            //     poolObjectsActive.Add(CreateBalloon());
-            // }
-            // else
-            // {
-            //     poolObjectsActive.Add(poolObjectsNonActive[0]);
-            //     poolObjectsNonActive[0].gameObject.SetActive(true);
-            //     poolObjectsNonActive[0].gameObject.transform.position = GetRandPosInZone(spawnZone.bounds);
-            //     poolObjectsNonActive.RemoveAt(0);
-            // }
+        {
+            CreateBalloon();
 
             yield return new WaitForSeconds(period);
         }        
     }
 
-    // private Balloon CreateBalloon()
-    // {
-    //     Balloon createdBalloon;
-
-    //     if (useRandScale)
-    //     {
-    //         float x = Random.Range(minSize, maxSize);
-    //         Vector2 newSize = new Vector2(x, x);
-    //         spawnObj.transform.localScale = newSize;
-    //         createdBalloon = Instantiate(spawnObj, GetRandPosInZone(spawnZone.bounds), Quaternion.identity, headOfObjs);
-    //     }
-    //     else
-    //         createdBalloon = Instantiate(spawnObj, GetRandPosInZone(spawnZone.bounds), Quaternion.identity, headOfObjs);
-
-    //     if (spriteRendererColors.Count > 0)
-    //     {
-    //         Color newColor = spriteRendererColors[Random.Range(0, spriteRendererColors.Count)];
-    //         createdBalloon.Init(newColor);
-    //     }
-    //     return createdBalloon;
-    // }
-
-    private void UpdateNonActivePoolObj(Balloon balloon)
+    private void RefreshNonActiveBalloonPool(Balloon balloon)
     {
         balloonPool.DisbaleItem(balloon);
-    }    
+    }
+
+    private void RefreshNonActiveExplosionPool(Explosion explosion)
+    {
+        explosionPool.DisbaleItem(explosion);
+    }
 
     private Vector2 GetRandPosInZone(Bounds bounds)
     {        
         return new Vector2(Random.Range(bounds.min.x, bounds.max.x), 
                            Random.Range(bounds.min.y, bounds.max.y));
+    }
+
+    private void CreateBalloon()
+    {
+        Balloon newBallon = balloonPool.GetItem();
+
+        newBallon.transform.position = GetRandPosInZone(spawnZone.bounds);
+
+        if (spriteRendererColors.Count > 0)
+        {
+            Color newColor = spriteRendererColors[Random.Range(0, spriteRendererColors.Count)];
+            newBallon.Init(newColor);
+        }
+
+        float x = Random.Range(minSize, maxSize);
+        Vector2 newSize = new Vector2(x, x);
+        newBallon.transform.localScale = newSize;
+    }
+
+    private void CreateExplosion(Transform deathTransform)
+    {
+        Explosion newExplosion = explosionPool.GetItem();        
+        newExplosion.transform.position = deathTransform.position;
     }
 }

@@ -26,17 +26,28 @@ public class UI_Scores : MonoBehaviour
 
     private void RefreshUI(Color color)
     {
-        if(lastColor == color)
-            multiplier++;
-        else                   
-            multiplier = 1;
-        
-        lastColor = color;
+        CalculateMultiplier(color);
+
         curScore += Balloon.WORTH * multiplier;
         textUI.text = curScore.ToString();
+
+        CreateAddedScoreText();
+    }
+
+    private void CalculateMultiplier(Color color)
+    {
+        if (lastColor == color)
+            multiplier++;
+        else
+            multiplier = 1;
+        lastColor = color;
+    }
+
+    private void CreateAddedScoreText()
+    {
         textBonus.text = (Balloon.WORTH * multiplier).ToString();
         float randZ = Random.Range(45, 135);
         offsetTextBonus = new Vector2(Random.Range(-5, 5), 5);
-        Instantiate(textBonus.gameObject, (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition)+ offsetTextBonus, Quaternion.Euler(0, 0, randZ));
+        Instantiate(textBonus.gameObject, (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) + offsetTextBonus, Quaternion.Euler(0, 0, randZ));
     }
 }

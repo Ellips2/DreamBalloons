@@ -4,16 +4,22 @@ using LiderboardSystem;
 [RequireComponent(typeof (SpriteRenderer))]
 public class Balloon : MonoBehaviour
 {
-    public Liderboard liderboard;
-    public BalloonEventChannelSO deathChannel;
-    public ColorEventChannelSO scoreChannel;
-    public IntEventChannelSO playerTapChannel;
-    private bool mouseOverMe;
+    [SerializeField]
+    private Liderboard liderboard;
+    [SerializeField]
+    private BalloonEventChannelSO balloonChannel;
+    [SerializeField]
+    private TransformEventChannelSO explosionChannel;
+    [SerializeField]
+    private ColorEventChannelSO scoreChannel;
+    [SerializeField]
+    private IntEventChannelSO playerTapChannel;
 
-    public const int WORTH = 1;
-    [HideInInspector]
+    private bool mouseOverMe;
+    private SpriteRenderer spriteRenderer;
     private Color myColor;
     public Color MyColor => myColor;
+    public const int WORTH = 1;
 
     [SerializeField]
     private Rigidbody2D myRig;
@@ -28,9 +34,11 @@ public class Balloon : MonoBehaviour
     [SerializeField]
     private Vector2 direction = new Vector2(0, 1);
     private bool useSin;
+
     [SerializeField]
     private GameObject explosion;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private TrailRenderer trailRenderer;
 
     private int health = 1;
     public int Health
@@ -48,8 +56,6 @@ public class Balloon : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        playerTapChannel.OnEventRaised += DecreaseHealth;
-        direction = direction*force;
         if (Random.Range(0, 2) == 0)
         {
             useSin = true;
@@ -60,8 +66,15 @@ public class Balloon : MonoBehaviour
         }
     }
 
+    private void OnEnable() 
+    {
+        trailRenderer.enabled = true;
+        playerTapChannel.OnEventRaised += DecreaseHealth;
+    }
+
     private void OnDisable()
     {
+        trailRenderer.enabled = false;
         playerTapChannel.OnEventRaised -= DecreaseHealth;
     }
 
@@ -91,7 +104,7 @@ public class Balloon : MonoBehaviour
     private void OnMouseExit()
     {
         mouseOverMe = false;
-    }
+    }    
 
     private void DecreaseHealth(int damage)
     {
@@ -101,22 +114,13 @@ public class Balloon : MonoBehaviour
 
     public void Death(bool withScore)
     {
-        if(withScore)
+        if (withScore)
         {
-            if (scoreChannel != null)
-            {
-                scoreChannel.RaiseEvent(myColor);
-            }
-        }     
-        else
-        {
-            if (deathChannel != null)
-            {
-                deathChannel.RaiseEvent(this);
-            }
-        }   
-        // explosion.transform.parent = transform.parent;
-        // explosion.SetActive(true);
+            scoreChannel?.RaiseEvent(myColor);            
+            explosionChannel?.RaiseEvent(transform);
+        }    
+
+        balloonChannel?.RaiseEvent(this);
         gameObject.SetActive(false);
     }
 }

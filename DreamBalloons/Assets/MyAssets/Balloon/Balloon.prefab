@@ -101,7 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liderboard: {fileID: 11400000, guid: 9d60cacf5b9f5f84e89a0cc8c8163846, type: 2}
-  deathChannel: {fileID: 11400000, guid: 207e273f3e0793a4aba6f7c8c3ad736b, type: 2}
+  balloonChannel: {fileID: 11400000, guid: 207e273f3e0793a4aba6f7c8c3ad736b, type: 2}
+  explosionChannel: {fileID: 11400000, guid: 24edfea6f39ec344cb7081487341700a, type: 2}
   scoreChannel: {fileID: 11400000, guid: a308daf0248b8304d9cffba93a1e6fda, type: 2}
   playerTapChannel: {fileID: 11400000, guid: 40818d4b0858a164b9cb2c2d334b01ec, type: 2}
   myRig: {fileID: 650140827507511356}
@@ -110,8 +111,8 @@ MonoBehaviour:
   amplitude: 0.5
   frequency: 1
   direction: {x: 0, y: 1}
-  useSin: 0
   explosion: {fileID: 5787955553281070086, guid: 22c1f6a183b0e8245ae88fb8471f4d64, type: 3}
+  trailRenderer: {fileID: 3643429255299572990}
 --- !u!50 &650140827507511356
 Rigidbody2D:
   serializedVersion: 4

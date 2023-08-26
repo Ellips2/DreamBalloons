@@ -52,17 +52,17 @@ public class Timer : MonoBehaviour
             endTimerAction.Invoke();
         if (destroySelf)
             DestroySelf();
+        if (onlySetActive)
+            DisableSelf();
     }
 
     private void DestroySelf()
     {
-        if (onlySetActive)
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
+    }
+
+    private void DisableSelf()
+    {
+        gameObject.SetActive(false);
     }
 }
