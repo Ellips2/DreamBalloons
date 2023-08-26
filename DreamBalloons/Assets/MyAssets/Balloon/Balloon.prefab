@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 833891640124721076}
   - component: {fileID: 650140827507511356}
   - component: {fileID: 2118517533384007568}
+  - component: {fileID: 6182288176013808205}
   m_Layer: 0
   m_Name: Balloon
   m_TagString: Untagged
@@ -105,12 +106,6 @@ MonoBehaviour:
   explosionChannel: {fileID: 11400000, guid: 24edfea6f39ec344cb7081487341700a, type: 2}
   scoreChannel: {fileID: 11400000, guid: a308daf0248b8304d9cffba93a1e6fda, type: 2}
   playerTapChannel: {fileID: 11400000, guid: 40818d4b0858a164b9cb2c2d334b01ec, type: 2}
-  myRig: {fileID: 650140827507511356}
-  force: 2
-  maxSpeed: 2
-  amplitude: 0.5
-  frequency: 1
-  direction: {x: 0, y: 1}
   explosion: {fileID: 5787955553281070086, guid: 22c1f6a183b0e8245ae88fb8471f4d64, type: 3}
   trailRenderer: {fileID: 3643429255299572990}
 --- !u!50 &650140827507511356
@@ -241,6 +236,23 @@ PolygonCollider2D:
       - {x: 0.052, y: -0.36}
       - {x: 0.054, y: -0.354}
   m_UseDelaunayMesh: 0
+--- !u!114 &6182288176013808205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822592598091940973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fccaac35b8f006d408c5d4ddba6a98f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRig: {fileID: 650140827507511356}
+  force: 1
+  maxSpeed: 2
+  amplitude: 0.5
+  frequency: 1
 --- !u!1 &9184357148044289218
 GameObject:
   m_ObjectHideFlags: 0

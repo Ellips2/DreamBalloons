@@ -22,24 +22,10 @@ public class Balloon : MonoBehaviour
     public const int WORTH = 1;
 
     [SerializeField]
-    private Rigidbody2D myRig;
-    [SerializeField]
-    private float force = 1f;
-    [SerializeField]
-    private float maxSpeed = 10;
-    [SerializeField]
-    private float amplitude = 0.25f; //????????? ?????????? ?? ????????? ??????????
-    [SerializeField]
-    private float frequency = 0.1f; //??????? ?????????
-    [SerializeField]
-    private Vector2 direction = new Vector2(0, 1);
-    private bool useSin;
-
-    [SerializeField]
     private GameObject explosion;
     [SerializeField]
-    private TrailRenderer trailRenderer;
-
+    private TrailRenderer trailRenderer;    
+    [SerializeField]
     private int health = 1;
     public int Health
     {
@@ -56,14 +42,6 @@ public class Balloon : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (Random.Range(0, 2) == 0)
-        {
-            useSin = true;
-        }
-        else
-        {
-            useSin = false;
-        }
     }
 
     private void OnEnable() 
@@ -76,24 +54,6 @@ public class Balloon : MonoBehaviour
     {
         trailRenderer.enabled = false;
         playerTapChannel.OnEventRaised -= DecreaseHealth;
-    }
-
-    private void FixedUpdate() 
-    {
-        if (myRig.velocity.magnitude < maxSpeed)
-        {
-            direction = new Vector2(GetOffset(transform.position.y, useSin), direction.y).normalized;
-            myRig.AddForce(direction*force);
-        }
-        
-    }
-
-    public float GetOffset(float y, bool useSin)
-    {
-        if (useSin)
-            return Mathf.Sin(frequency * y) * amplitude;
-        else
-            return Mathf.Cos(frequency * y) * amplitude;
     }
 
     private void OnMouseEnter()
