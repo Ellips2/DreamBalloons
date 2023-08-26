@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerTaps : MonoBehaviour
 {
-    public IntEventChannelSO tapChannel;
-
+    [SerializeField]
+    private IntEventChannelSO tapChannel;
     private int damage = 1;
     public int Damage
     {

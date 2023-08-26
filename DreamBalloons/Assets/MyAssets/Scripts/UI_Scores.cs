@@ -4,14 +4,20 @@ using LiderboardSystem;
 
 public class UI_Scores : MonoBehaviour
 {
-    public ColorEventChannelSO scoreChannel;
-    public Liderboard liderboard;
+    [SerializeField]
+    private ColorEventChannelSO scoreChannel;
+    [SerializeField]
+    private Liderboard liderboard;
+    [SerializeField]
     private TextMeshProUGUI textUI;
-    public int curScore = 0;
+    [SerializeField]
+    private TextMeshProUGUI textBonus;
+    [SerializeField]
+    private Canvas canvas;
+
+    private int curScore = 0;
     private Color lastColor;
-    private int multiplier = 1;
-    public TextMeshProUGUI textBonus;
-    private Vector2 offsetTextBonus;
+    private int multiplier = 1;    
 
     private void Awake()
     {
@@ -45,9 +51,23 @@ public class UI_Scores : MonoBehaviour
 
     private void CreateAddedScoreText()
     {
-        textBonus.text = (Balloon.WORTH * multiplier).ToString();
-        float randZ = Random.Range(45, 135);
-        offsetTextBonus = new Vector2(Random.Range(-5, 5), 5);
-        Instantiate(textBonus.gameObject, (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) + offsetTextBonus, Quaternion.Euler(0, 0, randZ));
+        textBonus.text = "+" + (Balloon.WORTH * multiplier);
+        textBonus.color = lastColor;
+
+        float randAngle = 0;
+        Vector2 offsetTextBonus = new Vector2(0, 100);
+
+        if (Random.value < 0.5f)
+        {
+            randAngle = 25;
+            offsetTextBonus = new Vector2(-100, 100);
+        }
+        else
+        {
+            randAngle = -25;
+            offsetTextBonus = new Vector2(100, 100);
+        }
+
+        Instantiate<TextMeshProUGUI>(textBonus, (Vector2)(Input.mousePosition) + offsetTextBonus, Quaternion.Euler(0, 0, randAngle), canvas.transform);
     }
 }

@@ -106,8 +106,10 @@ MonoBehaviour:
   explosionChannel: {fileID: 11400000, guid: 24edfea6f39ec344cb7081487341700a, type: 2}
   scoreChannel: {fileID: 11400000, guid: a308daf0248b8304d9cffba93a1e6fda, type: 2}
   playerTapChannel: {fileID: 11400000, guid: 40818d4b0858a164b9cb2c2d334b01ec, type: 2}
+  myDesireText: {fileID: 7010198691488760020, guid: 9e9929b207e83c44985d808b1e9f220c, type: 3}
   explosion: {fileID: 5787955553281070086, guid: 22c1f6a183b0e8245ae88fb8471f4d64, type: 3}
   trailRenderer: {fileID: 3643429255299572990}
+  health: 1
 --- !u!50 &650140827507511356
 Rigidbody2D:
   serializedVersion: 4

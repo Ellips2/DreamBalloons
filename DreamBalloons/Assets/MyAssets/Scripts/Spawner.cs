@@ -1,26 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField]
     [Range(0.0f, 10.0f)]
-    public float period;
-    public Balloon instBalloon;
-    public Explosion instExplosion;
-    public BoxCollider2D spawnZone;
-    public Transform balloonHead;
-    public Transform explosionHead;
-    public List<Color> spriteRendererColors = new List<Color>();
+    private float period;
+    [SerializeField]
+    private Balloon instBalloon;
+    [SerializeField]
+    private Explosion instExplosion;
+    [SerializeField]
+    private TextMeshProUGUI instTextDesire;
+    [SerializeField]
+    private BoxCollider2D spawnZone;
+    [SerializeField]
+    private Transform balloonHead;
+    [SerializeField]
+    private Transform explosionHead;
+    [SerializeField]
+    private Transform canvas;
+    [SerializeField]
+    private List<Color> spriteRendererColors = new List<Color>();
     private Pool<Balloon> balloonPool;
     private Pool<Explosion> explosionPool;
+    // private Pool<TextMeshProUGUI> textSimpleDesirePool;
 
     [SerializeField]
     private BalloonEventChannelSO deathChannel;
     [SerializeField]
     private ExplosionEventChannelSO explosionChannel;
     [SerializeField]
-    private TransformEventChannelSO explosionTransformChannel;
+    private TextMeshProUGUIEventChannelSO desireTextChannel;
+    [SerializeField]
+    private TextListSO simpleDesireTextList;
+    [SerializeField]
+    private TextListSO strongDesireTextList;
 
     public bool useRandScale;    
     [Range(0.1f, 2.0f)]
@@ -40,17 +57,18 @@ public class Spawner : MonoBehaviour
     {
         balloonPool = new Pool<Balloon>(instBalloon, balloonHead);
         explosionPool = new Pool<Explosion>(instExplosion, explosionHead);
+        // textSimpleDesirePool = new Pool<TextMeshProUGUI>(instTextDesire, canvas);
 
         deathChannel.OnEventRaised += RefreshNonActiveBalloonPool;
         explosionChannel.OnEventRaised += RefreshNonActiveExplosionPool;
-        explosionTransformChannel.OnEventRaised += CreateExplosion;
+        // desireTextChannel.OnEventRaised += RefreshNonActiveDesireTextPool;
     }
 
     private void OnDisable()
     {
         deathChannel.OnEventRaised -= RefreshNonActiveBalloonPool;
         explosionChannel.OnEventRaised -= RefreshNonActiveExplosionPool;
-        explosionTransformChannel.OnEventRaised -= CreateExplosion;
+        // desireTextChannel.OnEventRaised -= RefreshNonActiveDesireTextPool;
     }
 
     private void Start() 
@@ -74,12 +92,20 @@ public class Spawner : MonoBehaviour
     private void RefreshNonActiveBalloonPool(Balloon balloon)
     {
         balloonPool.DisbaleItem(balloon);
+        if(balloon.Health <= 0)
+        {
+            // CreateDesireText(balloon);
+            CreateExplosion(balloonHead.transform);
+        }
     }
-
     private void RefreshNonActiveExplosionPool(Explosion explosion)
     {
         explosionPool.DisbaleItem(explosion);
     }
+    // private void RefreshNonActiveDesireTextPool(TextMeshProUGUI text)
+    // {
+    //     textSimpleDesirePool.DisbaleItem(text);
+    // }
 
     private Vector2 GetRandPosInZone(Bounds bounds)
     {        
@@ -96,7 +122,7 @@ public class Spawner : MonoBehaviour
         if (spriteRendererColors.Count > 0)
         {
             Color newColor = spriteRendererColors[Random.Range(0, spriteRendererColors.Count)];
-            newBallon.Init(newColor);
+            newBallon.Init(newColor, simpleDesireTextList.text[Random.Range(0, simpleDesireTextList.text.Count)], canvas);
         }
 
         float x = Random.Range(minSize, maxSize);
@@ -109,4 +135,11 @@ public class Spawner : MonoBehaviour
         Explosion newExplosion = explosionPool.GetItem();        
         newExplosion.transform.position = deathTransform.position;
     }
+
+    // private void CreateDesireText(Balloon balloon)
+    // {
+    //     TextMeshProUGUI newTextDesire = textSimpleDesirePool.GetItem();
+    //     newTextDesire.text = balloon.MyDesireText;
+    //     newTextDesire.transform.position = Input.mousePosition;
+    // }
 }
