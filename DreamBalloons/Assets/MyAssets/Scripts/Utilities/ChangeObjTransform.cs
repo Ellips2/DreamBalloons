@@ -7,20 +7,30 @@ public class ChangeObjTransform : MonoBehaviour
     public Transform newTranform;
     public Vector3 newScale;
     public bool reverse;
-    public bool startScalingAtStart;
+    public bool runAtStart;
     
     private Vector2 tempPos;
     private Vector2 origScale;
     private float stepPerSecond;
     private float t;
+    [SerializeField]
+    private float timeScaling;
+
+    private void OnValidate() 
+    {
+        if (timeScaling < 0)
+        {
+            timeScaling = 0;
+        }
+    }
 
     private void Start() 
     {
         if(origTransform != null)
             origScale = origTransform.transform.localScale;
         
-        //if(startScalingAtStart)
-
+        if(runAtStart)
+            StartCoroutine(ScaleToNewScaleLerp(timeScaling));
     }
 
     public void MoveAtPoint()
