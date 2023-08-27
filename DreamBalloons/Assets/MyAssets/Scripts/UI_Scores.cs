@@ -16,18 +16,29 @@ public class UI_Scores : MonoBehaviour
     private Canvas canvas;
 
     private int curScore = 0;
+    public int CurScore => curScore;
     private Color lastColor;
     private int multiplier = 1;    
 
     private void Awake()
     {
         textUI = GetComponent<TextMeshProUGUI>();
+    }
+
+    private void OnEnable() 
+    {
         scoreChannel.OnEventRaised += RefreshUI;
     }
 
     private void OnDisable()
     {
         scoreChannel.OnEventRaised -= RefreshUI;
+    }
+
+    public void ResetCurScore()
+    {
+        curScore = 0;
+        textUI.text = curScore.ToString();
     }
 
     private void RefreshUI(Color color)

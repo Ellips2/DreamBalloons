@@ -34,7 +34,7 @@ public class Balloon : MonoBehaviour
     public int Health
     {
         get { return health; }
-        set { if (health <= 0) Death(true); else health = value; }
+        set { health = value; }
     }
 
     public void Init(Color colorValue, string newDesireText, Transform headDesireText)
@@ -74,10 +74,19 @@ public class Balloon : MonoBehaviour
         mouseOverMe = false;
     }    
 
+    private void OnMouseDown() 
+    {
+        //DecreaseHealth(1);
+    }
+
     private void DecreaseHealth(int damage)
     {
         if (mouseOverMe)
-            Health -= Mathf.Abs(damage);
+            health -= Mathf.Abs(damage);
+        if(health <= 0)
+        {
+            Death(true);
+        }
     }
 
     public void Death(bool withScore)
@@ -88,7 +97,6 @@ public class Balloon : MonoBehaviour
             Instantiate(myDesireText, Input.mousePosition, Quaternion.identity, canvas);
         }
         balloonChannel?.RaiseEvent(this);
-
 
         gameObject.SetActive(false);
     }

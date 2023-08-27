@@ -95,7 +95,7 @@ public class Spawner : MonoBehaviour
         if(balloon.Health <= 0)
         {
             // CreateDesireText(balloon);
-            CreateExplosion(balloonHead.transform);
+            CreateExplosion(balloon.transform);
         }
     }
     private void RefreshNonActiveExplosionPool(Explosion explosion)
