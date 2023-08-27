@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using LiderboardSystem;
 
 public class UI_Scores : MonoBehaviour
 {
@@ -12,11 +11,10 @@ public class UI_Scores : MonoBehaviour
     private TextMeshProUGUI textBonus;
     [SerializeField]
     private Canvas canvas;
-
+    private Color lastColor;
+    private int multiplier = 1;
     private int curScore = 0;
     public int CurScore => curScore;
-    private Color lastColor;
-    private int multiplier = 1;    
 
     private void Awake()
     {

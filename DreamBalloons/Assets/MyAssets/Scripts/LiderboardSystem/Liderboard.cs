@@ -7,10 +7,10 @@ namespace LiderboardSystem
     public class Liderboard : ScriptableObject
     {
         private const string key = "Liderboard";
-        [SerializeField] private int _capacity = 10;
-        private Table _table;
+        [SerializeField] private int capacity = 10;
+        private Table table;
 
-        public IEnumerable<Result> Results => _table.Results;
+        public IEnumerable<Result> Results => table.Results;
 
         public void Initialize()
         {
@@ -19,15 +19,15 @@ namespace LiderboardSystem
 
         public Result AddResult(string name, int score)
         {
-            var result = _table.AddResult(name, score);
-            _table.Crop(_capacity);
+            var result = table.AddResult(name, score);
+            table.Crop(capacity);
             Save();
             return result;
         }
 
         public void Clean()
         {
-            _table.Clean();
+            table.Clean();
             Save();
         }
 
@@ -36,14 +36,14 @@ namespace LiderboardSystem
             string json = PlayerPrefs.GetString(key);
             Debug.Log(json);
             if (string.IsNullOrEmpty(json))
-                _table = new Table();
+                table = new Table();
             else
-                _table = JsonUtility.FromJson<Table>(json);
+                table = JsonUtility.FromJson<Table>(json);
         }
 
         private void Save()
         {
-            string json = JsonUtility.ToJson(_table);
+            string json = JsonUtility.ToJson(table);
             PlayerPrefs.SetString(key, json);
             PlayerPrefs.Save();
         }

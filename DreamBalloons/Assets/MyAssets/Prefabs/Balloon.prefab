@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 650140827507511356}
   - component: {fileID: 2118517533384007568}
   - component: {fileID: 6182288176013808205}
+  - component: {fileID: 2253061178501522470}
   m_Layer: 0
   m_Name: Balloon
   m_TagString: Untagged
@@ -101,15 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d58028f6181d043bd6a102cf797cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liderboard: {fileID: 11400000, guid: 9d60cacf5b9f5f84e89a0cc8c8163846, type: 2}
   balloonChannel: {fileID: 11400000, guid: 207e273f3e0793a4aba6f7c8c3ad736b, type: 2}
-  explosionChannel: {fileID: 11400000, guid: 24edfea6f39ec344cb7081487341700a, type: 2}
   scoreChannel: {fileID: 11400000, guid: a308daf0248b8304d9cffba93a1e6fda, type: 2}
-  playerTapChannel: {fileID: 11400000, guid: 40818d4b0858a164b9cb2c2d334b01ec, type: 2}
-  myDesireText: {fileID: 7010198691488760020, guid: 9e9929b207e83c44985d808b1e9f220c, type: 3}
-  explosion: {fileID: 5787955553281070086, guid: 22c1f6a183b0e8245ae88fb8471f4d64, type: 3}
   trailRenderer: {fileID: 3643429255299572990}
-  health: 1
 --- !u!50 &650140827507511356
 Rigidbody2D:
   serializedVersion: 4
@@ -122,17 +117,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.1926718
+  m_Mass: 0.18315488
   m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 960b7e15e259bfd45a3222d8ef938eea, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -147,25 +136,6 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -181,62 +151,20 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.036000002, y: -0.324}
-      - {x: 0.034, y: -0.312}
-      - {x: 0.062000003, y: -0.30600002}
-      - {x: 0.09, y: -0.296}
-      - {x: 0.116000004, y: -0.284}
-      - {x: 0.136, y: -0.272}
-      - {x: 0.162, y: -0.252}
-      - {x: 0.192, y: -0.22000001}
-      - {x: 0.21000001, y: -0.2}
-      - {x: 0.23, y: -0.17}
-      - {x: 0.254, y: -0.12200001}
-      - {x: 0.268, y: -0.08400001}
-      - {x: 0.27800003, y: -0.048}
-      - {x: 0.282, y: -0.026}
-      - {x: 0.286, y: 0.004}
-      - {x: 0.28800002, y: 0.068}
+    - - {x: -0.027373977, y: -0.30982262}
+      - {x: 0.09207236, y: -0.29619625}
+      - {x: 0.19619395, y: -0.21249148}
+      - {x: 0.26286408, y: -0.08228804}
       - {x: 0.284, y: 0.116000004}
-      - {x: 0.27600002, y: 0.16800001}
-      - {x: 0.256, y: 0.22200002}
       - {x: 0.238, y: 0.26000002}
-      - {x: 0.22600001, y: 0.28}
-      - {x: 0.21400002, y: 0.298}
-      - {x: 0.19000001, y: 0.33}
       - {x: 0.13800001, y: 0.37600002}
-      - {x: 0.11000001, y: 0.39000002}
-      - {x: 0.08400001, y: 0.402}
-      - {x: 0.042000003, y: 0.416}
-      - {x: -0.038000003, y: 0.416}
-      - {x: -0.086, y: 0.404}
-      - {x: -0.13000001, y: 0.38000003}
-      - {x: -0.158, y: 0.358}
+      - {x: 0.016445812, y: 0.41505542}
+      - {x: -0.104610994, y: 0.39073372}
       - {x: -0.19800001, y: 0.32000002}
-      - {x: -0.22000001, y: 0.294}
-      - {x: -0.256, y: 0.23}
       - {x: -0.27, y: 0.192}
-      - {x: -0.286, y: 0.128}
-      - {x: -0.28800002, y: 0.09200001}
       - {x: -0.28800002, y: 0.010000001}
-      - {x: -0.28, y: -0.054}
-      - {x: -0.268, y: -0.08800001}
-      - {x: -0.25800002, y: -0.12200001}
       - {x: -0.22800002, y: -0.17600001}
-      - {x: -0.21000001, y: -0.202}
-      - {x: -0.17400001, y: -0.24200001}
       - {x: -0.14, y: -0.27}
-      - {x: -0.11800001, y: -0.284}
-      - {x: -0.076000005, y: -0.30400002}
-      - {x: -0.046000004, y: -0.312}
-      - {x: -0.022000002, y: -0.314}
-      - {x: -0.048, y: -0.35200003}
-      - {x: -0.05, y: -0.36600003}
-      - {x: -0.038000003, y: -0.36800003}
-      - {x: 0.024, y: -0.36800003}
-      - {x: 0.044000003, y: -0.36600003}
-      - {x: 0.052, y: -0.36}
-      - {x: 0.054, y: -0.354}
   m_UseDelaunayMesh: 0
 --- !u!114 &6182288176013808205
 MonoBehaviour:
@@ -255,6 +183,19 @@ MonoBehaviour:
   maxSpeed: 2
   amplitude: 0.5
   frequency: 1
+--- !u!114 &2253061178501522470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822592598091940973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6876803ba35184bf9b6a393e33a2f264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tolerance: 0.02
 --- !u!1 &9184357148044289218
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +271,6 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Time: 0.5
-  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.010407802
@@ -376,7 +316,6 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

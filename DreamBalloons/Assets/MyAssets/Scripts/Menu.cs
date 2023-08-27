@@ -9,26 +9,24 @@ public class Menu : MonoBehaviour
     private Text textLiderBoard;
     [SerializeField]
     private Liderboard liderboard;
-    private string curName = "";
-    public string CurName => curName;
     [SerializeField]
     private Text userNameUI;
     [SerializeField]
     private Text textPrefixUserName;
     [SerializeField]
     private Text inputField;
-    private const string key = "Username";
     [SerializeField]
     private Canvas canvasInGame;
     [SerializeField]
     private Canvas canvasUsername;
-
+    private string curName = "";
+    public string CurName => curName;
+    
     private void Start() 
     {
         liderboard.Initialize();
         RefreshUserName();
         PauseGame(true);
-        //Load();
     }
 
     public void OpenMenu()
@@ -70,7 +68,6 @@ public class Menu : MonoBehaviour
     {
         curName = inputField.text;
         RefreshUserName();
-        //Save();
     }
 
     public void RefreshUserName()
@@ -95,22 +92,4 @@ public class Menu : MonoBehaviour
     {
         Application.Quit();
     }
-
-    // private void Load()
-    // {
-    //     string json = PlayerPrefs.GetString(key);
-    //     Debug.Log(json);
-    //     if (string.IsNullOrEmpty(json))
-    //         curName = "";
-    //     else
-    //         curName = JsonUtility.FromJson<String>(json);
-    //     userNameUI.text += curName;
-    // }
-
-    // private void Save()
-    // {
-    //     string json = JsonUtility.ToJson(curName);
-    //     PlayerPrefs.SetString(key, json);
-    //     PlayerPrefs.Save();
-    // }
 }

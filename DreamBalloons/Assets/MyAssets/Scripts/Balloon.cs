@@ -10,16 +10,11 @@ public class Balloon : MonoBehaviour
     private ColorEventChannelSO scoreChannel;
     [SerializeField]
     private TrailRenderer trailRenderer;    
-    [SerializeField]
-    private int health = 1;
     private SpriteRenderer spriteRenderer;
     private Color myColor;
     public Color MyColor => myColor;
-    public int Health
-    {
-        get { return health; }
-        set { health = value; }
-    }
+    private int health = 1;
+    public int Health { get { return health; } set { health = value; }}
 
     public void Init(Color colorValue)
     {

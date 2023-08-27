@@ -11,15 +11,15 @@ public class MoveByAddForce : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 2f;
     [SerializeField]
-    private float amplitude = 0.5f; //????????? ?????????? ?? ????????? ??????????
+    private float amplitude = 0.5f;
     [SerializeField]
-    private float frequency = 1f; //??????? ?????????
+    private float frequency = 1f;
     private Vector2 direction = new Vector2(0, 1);
     private bool useSin;
 
     private void Awake() 
     {
-        if (Random.Range(0, 2) == 0)
+        if (Random.value < 0.5f)
         {
             useSin = true;
         }

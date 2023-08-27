@@ -18,26 +18,19 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private Transform explosionHead;
     [SerializeField]
-    private Transform canvas;
-    [SerializeField]
     private List<Color> spriteRendererColors = new List<Color>();
-    private Pool<Balloon> balloonPool;
-    private Pool<Explosion> explosionPool;
-
     [SerializeField]
     private BalloonEventChannelSO deathChannel;
     [SerializeField]
     private ExplosionEventChannelSO explosionChannel;
     [SerializeField]
-    private TextListSO simpleDesireTextList;
+    [Range(0.1f, 2.0f)]
+    private float minSize = 0.0f;
     [SerializeField]
-    private TextListSO strongDesireTextList;
-
-    public bool useRandScale;    
     [Range(0.1f, 2.0f)]
-    public float minSize = 0.0f;
-    [Range(0.1f, 2.0f)]
-    public float maxSize = 1.1f;
+    private float maxSize = 1.1f;
+    private Pool<Balloon> balloonPool;
+    private Pool<Explosion> explosionPool;
 
     private void OnValidate() 
     {
@@ -51,7 +44,10 @@ public class Spawner : MonoBehaviour
     {
         balloonPool = new Pool<Balloon>(instBalloon, balloonHead);
         explosionPool = new Pool<Explosion>(instExplosion, explosionHead);
+    }
 
+    private void OnEnable()
+    {
         deathChannel.OnEventRaised += RefreshNonActiveBalloonPool;
         explosionChannel.OnEventRaised += RefreshNonActiveExplosionPool;
     }
