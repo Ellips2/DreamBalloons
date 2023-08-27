@@ -156,7 +156,7 @@ PrefabInstance:
     - target: {fileID: 6335038328556851509, guid: e397534993a3daa4fb62356a2b6e1856,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6335038328556851509, guid: e397534993a3daa4fb62356a2b6e1856,
         type: 3}
@@ -308,7 +308,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'My name is Peter,
 
-    I am 11 years old!'
+    I am 9 years old!'
 --- !u!222 &22897345
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -572,6 +572,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4326383881512026859, guid: 298daca7decb9f846b5ff996ee97a495,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.35355338
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326383881512026859, guid: 298daca7decb9f846b5ff996ee97a495,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.35355338
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326383881512026859, guid: 298daca7decb9f846b5ff996ee97a495,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.1464466
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326383881512026859, guid: 298daca7decb9f846b5ff996ee97a495,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8535535
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 298daca7decb9f846b5ff996ee97a495, type: 3}
 --- !u!1001 &306131098
@@ -817,7 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b00b1c461a103b4898dcc53ee709d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 11
+  value: 9
 --- !u!4 &1032891298
 Transform:
   m_ObjectHideFlags: 0
@@ -867,7 +887,7 @@ PrefabInstance:
     - target: {fileID: 6335038328556851509, guid: e397534993a3daa4fb62356a2b6e1856,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6335038328556851509, guid: e397534993a3daa4fb62356a2b6e1856,
         type: 3}
@@ -1052,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: 6335038328556851509, guid: e397534993a3daa4fb62356a2b6e1856,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6335038328556851509, guid: e397534993a3daa4fb62356a2b6e1856,
         type: 3}
@@ -1277,7 +1297,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!1 &1876105028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,9 +1486,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLanguage: English
-  defaultLanguage: English
   detectLanguage: 1
-  saveLanguage: 1
+  defaultLanguage: English
+  saveLoad: 1
   prefabs: []
 --- !u!4 &1938704569
 Transform:

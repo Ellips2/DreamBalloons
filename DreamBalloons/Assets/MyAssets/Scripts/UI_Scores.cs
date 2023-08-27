@@ -7,8 +7,6 @@ public class UI_Scores : MonoBehaviour
     [SerializeField]
     private ColorEventChannelSO scoreChannel;
     [SerializeField]
-    private Liderboard liderboard;
-    [SerializeField]
     private TextMeshProUGUI textUI;
     [SerializeField]
     private TextMeshProUGUI textBonus;

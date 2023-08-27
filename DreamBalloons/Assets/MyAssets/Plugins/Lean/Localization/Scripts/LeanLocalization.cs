@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
 using Lean.Common;
+using CW.Common;
 
 namespace Lean.Localization
 {
@@ -27,7 +27,7 @@ namespace Lean.Localization
 			WhenChangedAlt
 		}
 
-		public const string HelpUrlPrefix = LeanHelper.HelpUrlPrefix + "LeanLocalization#";
+		public const string HelpUrlPrefix = LeanCommon.HelpUrlPrefix + "LeanLocalization#";
 
 		public const string ComponentPathPrefix = "Lean/Localization/Lean ";
 
@@ -49,17 +49,17 @@ namespace Lean.Localization
 		private string currentLanguage;
 
 		/// <summary>How should the cultures be used to detect the user's device language?</summary>
-		public DetectType DetectLanguage { set { detectLanguage = value; } get { return detectLanguage; } } [FSA("DetectLanguage")] [SerializeField] private DetectType detectLanguage = DetectType.SystemLanguage;
+		public DetectType DetectLanguage { set { detectLanguage = value; } get { return detectLanguage; } } [SerializeField] private DetectType detectLanguage = DetectType.SystemLanguage;
 
 		/// <summary>If the application is started and no language has been loaded or auto detected, this language will be used.</summary>
-		public string DefaultLanguage { set { defaultLanguage = value; } get { return defaultLanguage; } } [FSA("DefaultLanguage")] [SerializeField] [LeanLanguageName] private string defaultLanguage;
+		public string DefaultLanguage { set { defaultLanguage = value; } get { return defaultLanguage; } } [SerializeField] [LeanLanguageName] private string defaultLanguage;
 
 		/// <summary>This allows you to control if/how this component's <b>CurrentLanguage</b> setting should save/load.
 		/// None = Only the <b>DetectLanguage</b> and <b>DefaultLanguage</b> settings will be used.
 		/// WhenChanged = If the <b>CurrentLanguage</b> gets manually changed, automatically save/load it to PlayerPrefs?
 		/// 
 		/// NOTE: This save data can be cleared with <b>ClearSave</b> context menu option.</summary>
-		public SaveLoadType SaveLoad { set { saveLoad = value; } get { return saveLoad; } } [FSA("saveLanguage")] [FSA("SaveLanguage")] [SerializeField] private SaveLoadType saveLoad = SaveLoadType.WhenChanged;
+		public SaveLoadType SaveLoad { set { saveLoad = value; } get { return saveLoad; } } [SerializeField] private SaveLoadType saveLoad = SaveLoadType.WhenChanged;
 
 		/// <summary>This stores all prefabs and folders managed by this LeanLocalization instance.</summary>
 		public List<LeanPrefab> Prefabs { get { if (prefabs == null) prefabs = new List<LeanPrefab>(); return prefabs; } } [SerializeField] private List<LeanPrefab> prefabs;
@@ -550,6 +550,81 @@ namespace Lean.Localization
 				currentLanguage = defaultLanguage;
 			}
 		}
+
+#if UNITY_EDITOR
+		/// <summary>This exports all text phrases in the LeanLocalization component for the Language specified by this component.</summary>
+		[ContextMenu("Export CurrentLanguage To CSV (Comma Format)")]
+		private void ExportTextAsset()
+		{
+			if (string.IsNullOrEmpty(currentLanguage) == false)
+			{
+				// Find where we want to save the file
+				var path = UnityEditor.EditorUtility.SaveFilePanelInProject("Export Text Asset for " + currentLanguage, currentLanguage, "csv", "");
+
+				// Make sure we didn't cancel the panel
+				if (string.IsNullOrEmpty(path) == false)
+				{
+					DoExportTextAsset(path);
+				}
+			}
+		}
+
+		private void DoExportTextAsset(string path)
+		{
+			var data = "";
+			var gaps = false;
+
+			// Add all phrase names and existing translations to lines
+			foreach (var pair in CurrentTranslations)
+			{
+				var translation = pair.Value;
+
+				if (gaps == true)
+				{
+					data += System.Environment.NewLine;
+				}
+
+				data += pair.Key + ",\"";
+				gaps  = true;
+
+				if (translation.Data is string)
+				{
+					var text = (string)translation.Data;
+
+					// Replace all new line permutations with the new line token
+					text = text.Replace("\r\n", "\n");
+					text = text.Replace("\n\r", "\n");
+					text = text.Replace("\r", "\n");
+
+					data += text;
+				}
+
+				data += "\"";
+			}
+
+			// Write text to file
+			using (var file = System.IO.File.OpenWrite(path))
+			{
+				var encoding = new System.Text.UTF8Encoding();
+				var bytes    = encoding.GetBytes(data);
+
+				file.Write(bytes, 0, bytes.Length);
+			}
+
+			// Import asset into project
+			UnityEditor.AssetDatabase.ImportAsset(path);
+
+			// Replace Source with new Text Asset?
+			var textAsset = (TextAsset)UnityEditor.AssetDatabase.LoadAssetAtPath(path, typeof(TextAsset));
+
+			if (textAsset != null)
+			{
+				UnityEditor.EditorGUIUtility.PingObject(textAsset);
+
+				UnityEditor.EditorUtility.SetDirty(this);
+			}
+		}
+#endif
 	}
 }
 
@@ -559,8 +634,9 @@ namespace Lean.Localization.Editor
 	using UnityEditor;
 	using TARGET = LeanLocalization;
 
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanLocalization_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanLocalization_Editor : CwEditor
 	{
 		class PresetLanguage
 		{

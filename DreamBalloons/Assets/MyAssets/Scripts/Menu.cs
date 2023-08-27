@@ -1,6 +1,5 @@
 using UnityEngine;
 using LiderboardSystem;
-using System;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
@@ -26,9 +25,10 @@ public class Menu : MonoBehaviour
 
     private void Start() 
     {
+        liderboard.Initialize();
         RefreshUserName();
         PauseGame(true);
-        Load();
+        //Load();
     }
 
     public void OpenMenu()
@@ -70,7 +70,7 @@ public class Menu : MonoBehaviour
     {
         curName = inputField.text;
         RefreshUserName();
-        Save();
+        //Save();
     }
 
     public void RefreshUserName()
@@ -96,21 +96,21 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
-    private void Load()
-    {
-        string json = PlayerPrefs.GetString(key);
-        Debug.Log(json);
-        if (string.IsNullOrEmpty(json))
-            curName = "";
-        else
-            curName = JsonUtility.FromJson<String>(json);
-        userNameUI.text += curName;
-    }
+    // private void Load()
+    // {
+    //     string json = PlayerPrefs.GetString(key);
+    //     Debug.Log(json);
+    //     if (string.IsNullOrEmpty(json))
+    //         curName = "";
+    //     else
+    //         curName = JsonUtility.FromJson<String>(json);
+    //     userNameUI.text += curName;
+    // }
 
-    private void Save()
-    {
-        string json = JsonUtility.ToJson(curName);
-        PlayerPrefs.SetString(key, json);
-        PlayerPrefs.Save();
-    }
+    // private void Save()
+    // {
+    //     string json = JsonUtility.ToJson(curName);
+    //     PlayerPrefs.SetString(key, json);
+    //     PlayerPrefs.Save();
+    // }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.U2D;
-using SpriteGlow;
+// using SpriteGlow;
 using TMPro;
 
 public class ColorChanger : MonoBehaviour
@@ -40,7 +40,7 @@ public class ColorChanger : MonoBehaviour
     // private Light2D lightSource;
     private Outline outline;
     private SpriteShapeRenderer spriteShapeRenderer;
-    private SpriteGlow.SpriteGlowEffect spriteGlowEffect;
+    //private SpriteGlow.SpriteGlowEffect spriteGlowEffect;
     private TextMeshProUGUI textMeshProUGUI;
 
     [HideInInspector] 
@@ -168,13 +168,13 @@ public class ColorChanger : MonoBehaviour
 
     public void GetOldColor(Transform target)
     {
-        if (target.GetComponent<SpriteGlowEffect>())
-        {
-            spriteGlowEffect = target.GetComponent<SpriteGlowEffect>();
-            oldColor = spriteGlowEffect.GlowColor;
-            componentIsFound = true;
-            //return;
-        }
+        // if (target.GetComponent<SpriteGlowEffect>())
+        // {
+        //     spriteGlowEffect = target.GetComponent<SpriteGlowEffect>();
+        //     oldColor = spriteGlowEffect.GlowColor;
+        //     componentIsFound = true;
+        //     //return;
+        // }
         if (target.GetComponent<SpriteRenderer>())
         {
             spriteRenderer = target.GetComponent<SpriteRenderer>();
@@ -241,8 +241,8 @@ public class ColorChanger : MonoBehaviour
         {
             GetLerpedColor(oldColor, newColor);
 
-            if (spriteGlowEffect != null)
-                spriteGlowEffect.GlowColor = lerpedColor;
+            // if (spriteGlowEffect != null)
+            //     spriteGlowEffect.GlowColor = lerpedColor;
             if (spriteRenderer != null)
                 spriteRenderer.color = lerpedColor;
             if (textMesh != null)
@@ -486,12 +486,12 @@ public class ColorChanger : MonoBehaviour
 
     public void ResetColorOfTarget(Transform target)
     {
-        if (target.GetComponent<SpriteGlowEffect>())
-        {
-            spriteGlowEffect = target.GetComponent<SpriteGlowEffect>();
-            spriteGlowEffect.GlowColor = oldColor;
-            //return;
-        }
+        // if (target.GetComponent<SpriteGlowEffect>())
+        // {
+        //     spriteGlowEffect = target.GetComponent<SpriteGlowEffect>();
+        //     spriteGlowEffect.GlowColor = oldColor;
+        //     //return;
+        // }
         if (target.GetComponent<SpriteRenderer>())
         {
             spriteRenderer = target.GetComponent<SpriteRenderer>();

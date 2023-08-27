@@ -1,4 +1,4 @@
-﻿Shader "Lean/Common/Skybox"
+﻿Shader "CW/Skybox"
 {
 	Properties
 	{
@@ -9,7 +9,7 @@
 
 	SubShader
 	{
-		Cull Off
+		Cull Front
 		ZWrite Off
 
 		Tags
