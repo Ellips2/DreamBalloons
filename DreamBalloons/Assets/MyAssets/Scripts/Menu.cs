@@ -2,20 +2,21 @@ using TMPro;
 using UnityEngine;
 using LiderboardSystem;
 using System;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
     private float oldTimeScale;
     [SerializeField]
-    private TextMeshProUGUI textLedearBoard;
+    private TextMeshProUGUI textLiderBoard;
     [SerializeField]
     private Liderboard liderboard;
     private string curName = "";
     public string CurName => curName;
     [SerializeField]
-    private TextMeshProUGUI userNameUI;
+    private Text userNameUI;
     [SerializeField]
-    private TextMeshProUGUI inputField;
+    private Text inputField;
     private const string key = "Username";
     [SerializeField]
     private Canvas canvasInGame;
@@ -66,14 +67,14 @@ public class Menu : MonoBehaviour
     public void AcceptNewName()
     {
         curName = inputField.text;
-        userNameUI.text = "????????????: "+curName;
+        userNameUI.text += curName;
         Save();
     }
 
     public void RefreshTextUI_Scores()
     {
         liderboard.AddResult(curName, 123);
-        textLedearBoard.text = liderboard.Results.ToString();
+        textLiderBoard.text = liderboard.Results.ToString();
     }
 
     public void ExitFromeGame()
@@ -89,7 +90,7 @@ public class Menu : MonoBehaviour
             curName = "";
         else
             curName = JsonUtility.FromJson<String>(json);
-        userNameUI.text = "????????????: " + curName;
+        userNameUI.text += curName;
     }
 
     private void Save()

@@ -489,31 +489,31 @@ public class ColorChanger : MonoBehaviour
         if (target.GetComponent<SpriteGlowEffect>())
         {
             spriteGlowEffect = target.GetComponent<SpriteGlowEffect>();
-            spriteGlowEffect.GlowColor = lerpedColor;
+            spriteGlowEffect.GlowColor = oldColor;
             //return;
         }
         if (target.GetComponent<SpriteRenderer>())
         {
             spriteRenderer = target.GetComponent<SpriteRenderer>();
-            spriteRenderer.color = lerpedColor;
+            spriteRenderer.color = oldColor;
             return;
         }
         if (target.GetComponent<TextMesh>())
         {
             textMesh = target.GetComponent<TextMesh>();
-            textMesh.color = lerpedColor;
+            textMesh.color = oldColor;
             return;
         }
         if (target.GetComponent<Text>())
         {
             textUI = target.GetComponent<Text>();
-            textUI.color = lerpedColor;
+            textUI.color = oldColor;
             return;
         }
         if (target.GetComponent<Image>())
         {
             imageUI = target.GetComponent<Image>();
-            imageUI.color = lerpedColor;
+            imageUI.color = oldColor;
             return;
         }
         // if (target.GetComponent<Light2D>())
@@ -525,19 +525,19 @@ public class ColorChanger : MonoBehaviour
         if (target.GetComponent<Outline>())
         {
             outline = target.GetComponent<Outline>();
-            outline.effectColor = lerpedColor;
+            outline.effectColor = oldColor;
             return;
         }
         if (target.GetComponent<SpriteShapeRenderer>())
         {
             spriteShapeRenderer = target.GetComponent<SpriteShapeRenderer>();
-            spriteShapeRenderer.color = lerpedColor;
+            spriteShapeRenderer.color = oldColor;
             return;
         }
         if (target.GetComponent<TextMeshProUGUI>())
         {
             textMeshProUGUI = target.GetComponent<TextMeshProUGUI>();
-            textMeshProUGUI.color = lerpedColor;
+            textMeshProUGUI.color = oldColor;
             return;
         }
     }

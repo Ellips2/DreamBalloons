@@ -1,5 +1,6 @@
 using UnityEngine;
 using LiderboardSystem;
+using UnityEngine.UI;
 
 public class GameRules : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class GameRules : MonoBehaviour
     private int missedBalloon = 0;
     [SerializeField]
     private GameObject textDefeat;
+    [SerializeField]
+    private Image healthBar;
+    [SerializeField]
+    private Spawner spawner;
+    private bool playerIsDefeat;
 
     private void OnEnable() 
     {
@@ -29,11 +35,13 @@ public class GameRules : MonoBehaviour
 
     private void CheckDefeateCondition(Balloon deadBalloon)
     {
-        if(deadBalloon.Health > 0)
+        if(deadBalloon.Health > 0 && !playerIsDefeat)
         {
-            missedBalloon++;
+            missedBalloon++;            
+            healthBar.fillAmount = 1 - (1.0f / MAX_MISSED_BALLOON) * missedBalloon;
             if (missedBalloon >= MAX_MISSED_BALLOON)
             {
+                playerIsDefeat = true;
                 Defeate();
             }
         }        
@@ -48,5 +56,8 @@ public class GameRules : MonoBehaviour
         }        
         scores.ResetCurScore();
         missedBalloon = 0;
+        healthBar.fillAmount = 1;
+        spawner.DisableAllActiveBalloons();
+        playerIsDefeat = false;
     }
 }

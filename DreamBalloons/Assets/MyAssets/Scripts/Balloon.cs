@@ -16,14 +16,11 @@ public class Balloon : MonoBehaviour
     [SerializeField]
     private IntEventChannelSO playerTapChannel;
 
-    private Transform canvas;
     private bool mouseOverMe;
     private SpriteRenderer spriteRenderer;
     private Color myColor;
     public Color MyColor => myColor;
     public const int WORTH = 1;
-    [SerializeField]
-    private TextMeshProUGUI myDesireText;
 
     [SerializeField]
     private GameObject explosion;
@@ -37,12 +34,10 @@ public class Balloon : MonoBehaviour
         set { health = value; }
     }
 
-    public void Init(Color colorValue, string newDesireText, Transform headDesireText)
+    public void Init(Color colorValue)
     {
         myColor = colorValue;
-        myDesireText.text = newDesireText;
         spriteRenderer.color = myColor;
-        canvas = headDesireText;
     }
 
     private void Awake()
@@ -74,11 +69,6 @@ public class Balloon : MonoBehaviour
         mouseOverMe = false;
     }    
 
-    private void OnMouseDown() 
-    {
-        //DecreaseHealth(1);
-    }
-
     private void DecreaseHealth(int damage)
     {
         if (mouseOverMe)
@@ -94,7 +84,6 @@ public class Balloon : MonoBehaviour
         if (withScore)
         {
             scoreChannel?.RaiseEvent(myColor);
-            Instantiate(myDesireText, Input.mousePosition, Quaternion.identity, canvas);
         }
         balloonChannel?.RaiseEvent(this);
 

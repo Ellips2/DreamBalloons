@@ -38,6 +38,11 @@ public class Pool <T> where T : MonoBehaviour
         poolNonActive.Add(poolObject);
     }
 
+    public List<T> GetListActiveItem()
+    {
+        return poolActive;
+    }
+
     private T CreateItem()
     { 
         return GameObject.Instantiate<T>(prefab, parent);

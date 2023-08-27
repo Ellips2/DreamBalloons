@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -13,8 +12,6 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private Explosion instExplosion;
     [SerializeField]
-    private TextMeshProUGUI instTextDesire;
-    [SerializeField]
     private BoxCollider2D spawnZone;
     [SerializeField]
     private Transform balloonHead;
@@ -26,14 +23,11 @@ public class Spawner : MonoBehaviour
     private List<Color> spriteRendererColors = new List<Color>();
     private Pool<Balloon> balloonPool;
     private Pool<Explosion> explosionPool;
-    // private Pool<TextMeshProUGUI> textSimpleDesirePool;
 
     [SerializeField]
     private BalloonEventChannelSO deathChannel;
     [SerializeField]
     private ExplosionEventChannelSO explosionChannel;
-    [SerializeField]
-    private TextMeshProUGUIEventChannelSO desireTextChannel;
     [SerializeField]
     private TextListSO simpleDesireTextList;
     [SerializeField]
@@ -57,18 +51,15 @@ public class Spawner : MonoBehaviour
     {
         balloonPool = new Pool<Balloon>(instBalloon, balloonHead);
         explosionPool = new Pool<Explosion>(instExplosion, explosionHead);
-        // textSimpleDesirePool = new Pool<TextMeshProUGUI>(instTextDesire, canvas);
 
         deathChannel.OnEventRaised += RefreshNonActiveBalloonPool;
         explosionChannel.OnEventRaised += RefreshNonActiveExplosionPool;
-        // desireTextChannel.OnEventRaised += RefreshNonActiveDesireTextPool;
     }
 
     private void OnDisable()
     {
         deathChannel.OnEventRaised -= RefreshNonActiveBalloonPool;
         explosionChannel.OnEventRaised -= RefreshNonActiveExplosionPool;
-        // desireTextChannel.OnEventRaised -= RefreshNonActiveDesireTextPool;
     }
 
     private void Start() 
@@ -94,7 +85,6 @@ public class Spawner : MonoBehaviour
         balloonPool.DisbaleItem(balloon);
         if(balloon.Health <= 0)
         {
-            // CreateDesireText(balloon);
             CreateExplosion(balloon.transform);
         }
     }
@@ -102,10 +92,6 @@ public class Spawner : MonoBehaviour
     {
         explosionPool.DisbaleItem(explosion);
     }
-    // private void RefreshNonActiveDesireTextPool(TextMeshProUGUI text)
-    // {
-    //     textSimpleDesirePool.DisbaleItem(text);
-    // }
 
     private Vector2 GetRandPosInZone(Bounds bounds)
     {        
@@ -122,7 +108,7 @@ public class Spawner : MonoBehaviour
         if (spriteRendererColors.Count > 0)
         {
             Color newColor = spriteRendererColors[Random.Range(0, spriteRendererColors.Count)];
-            newBallon.Init(newColor, simpleDesireTextList.text[Random.Range(0, simpleDesireTextList.text.Count)], canvas);
+            newBallon.Init(newColor);
         }
 
         float x = Random.Range(minSize, maxSize);
@@ -136,10 +122,13 @@ public class Spawner : MonoBehaviour
         newExplosion.transform.position = deathTransform.position;
     }
 
-    // private void CreateDesireText(Balloon balloon)
-    // {
-    //     TextMeshProUGUI newTextDesire = textSimpleDesirePool.GetItem();
-    //     newTextDesire.text = balloon.MyDesireText;
-    //     newTextDesire.transform.position = Input.mousePosition;
-    // }
+    public void DisableAllActiveBalloons()
+    {
+        Balloon[] activeBallons = balloonPool.GetListActiveItem().ToArray();
+
+        for (int i = 0; i < activeBallons.Length; i++)
+        {
+            activeBallons[i].Death(false);
+        }
+    }
 }
