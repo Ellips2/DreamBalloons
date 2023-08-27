@@ -1,6 +1,6 @@
 # DreamBalloons
-<img src="https://github.com/Ellips2/DreamBalloons/assets/101618933/70df259b-a834-4f33-8c4b-a0bfb9f6d323.png" width="200" height="355">
-<img src="https://github.com/Ellips2/DreamBalloons/assets/101618933/e0c17b2d-cce3-42fe-baa4-420bc2f1e509.png" width="200" height="355">
+![Screenshot_20230828_060339_2DreamBalloons](https://github.com/Ellips2/DreamBalloons/assets/101618933/fe4be701-b62e-4b08-8ba8-cb1fc8d25e32)
+![Screenshot_20230828_060235_2DreamBalloons](https://github.com/Ellips2/DreamBalloons/assets/101618933/61c6a9ee-9eaa-475a-a9b8-1a5e0ead69c5)
 
 Мобильная игра про лопание воздушных шариков. Лопая шарики одинакового цвета подряд, вы получите бонус к очкам. Ставьте рекорды. Если пропустите слишком много, проиграете. Шарики имеют коллайдеры и двигаются с помощью физики. От каждого лопнутого шарика исходит ударная волна, её можно пользоваться стратегически: одни шары отдалять от верхней границы, а другие, наоборот, подгонять.
 
