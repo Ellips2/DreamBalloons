@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3abd749556651584ab22ec3f8cda8de6, type: 3}
   m_Name: Liderboard
   m_EditorClassIdentifier: 
-  _capacity: 10
+  _capacity: 100

@@ -1,6 +1,7 @@
 using UnityEngine;
 using LiderboardSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof (SpriteRenderer))]
 public class Balloon : MonoBehaviour
@@ -21,6 +22,7 @@ public class Balloon : MonoBehaviour
     private Color myColor;
     public Color MyColor => myColor;
     public const int WORTH = 1;
+    private bool isTouched;
 
     [SerializeField]
     private GameObject explosion;
@@ -63,17 +65,23 @@ public class Balloon : MonoBehaviour
     {
         mouseOverMe = true;
     }
-
     private void OnMouseExit()
     {
         mouseOverMe = false;
-    }    
+    }
+
+    private void OnMouseUpAsButton() 
+    {
+        isTouched = true;
+    }
 
     private void DecreaseHealth(int damage)
     {
-        if (mouseOverMe)
+        if (mouseOverMe || isTouched)
             health -= Mathf.Abs(damage);
-        if(health <= 0)
+        isTouched = false;
+        
+        if (health <= 0)
         {
             Death(true);
         }

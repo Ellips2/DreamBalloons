@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using LiderboardSystem;
 using System;
@@ -8,13 +7,15 @@ public class Menu : MonoBehaviour
 {
     private float oldTimeScale;
     [SerializeField]
-    private TextMeshProUGUI textLiderBoard;
+    private Text textLiderBoard;
     [SerializeField]
     private Liderboard liderboard;
     private string curName = "";
     public string CurName => curName;
     [SerializeField]
     private Text userNameUI;
+    [SerializeField]
+    private Text textPrefixUserName;
     [SerializeField]
     private Text inputField;
     private const string key = "Username";
@@ -24,7 +25,8 @@ public class Menu : MonoBehaviour
     private Canvas canvasUsername;
 
     private void Start() 
-    {        
+    {
+        RefreshUserName();
         PauseGame(true);
         Load();
     }
@@ -67,14 +69,26 @@ public class Menu : MonoBehaviour
     public void AcceptNewName()
     {
         curName = inputField.text;
-        userNameUI.text += curName;
+        RefreshUserName();
         Save();
+    }
+
+    public void RefreshUserName()
+    {
+        userNameUI.text = textPrefixUserName.text + curName;
     }
 
     public void RefreshTextUI_Scores()
     {
-        liderboard.AddResult(curName, 123);
-        textLiderBoard.text = liderboard.Results.ToString();
+        textLiderBoard.text = "";
+        foreach (var res in liderboard.Results)
+            textLiderBoard.text += res.ToString()+"\n";
+    }
+
+    public void ClearScores()
+    {
+        liderboard.Clean();
+        RefreshTextUI_Scores();
     }
 
     public void ExitFromeGame()

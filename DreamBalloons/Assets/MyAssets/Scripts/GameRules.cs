@@ -50,10 +50,8 @@ public class GameRules : MonoBehaviour
     public void Defeate()
     {
         textDefeat.SetActive(true);
-        if (liderboard.Results.GetEnumerator() != null && liderboard.Results.GetEnumerator().Current.Score < scores.CurScore)
-        {
+        if (scores.CurScore > 0)
             liderboard.AddResult(menu.CurName, scores.CurScore);
-        }        
         scores.ResetCurScore();
         missedBalloon = 0;
         healthBar.fillAmount = 1;

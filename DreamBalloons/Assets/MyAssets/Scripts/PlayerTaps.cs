@@ -13,7 +13,7 @@ public class PlayerTaps : MonoBehaviour
 
     private void Update()
     {
-        if (tapChannel != null && Input.GetKeyDown(KeyCode.Mouse0))
+        if (tapChannel != null && (Input.GetKeyDown(KeyCode.Mouse0) || Input.touchCount > 0))
         {
             tapChannel.RaiseEvent(damage);
         }
