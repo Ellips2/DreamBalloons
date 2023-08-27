@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRig: {fileID: 650140827507511356}
-  force: 1
+  force: 2
   maxSpeed: 2
   amplitude: 0.5
   frequency: 1
